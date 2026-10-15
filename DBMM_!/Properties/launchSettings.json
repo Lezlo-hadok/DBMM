@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DBMM_! (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "DBMM_! (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
