@@ -30,49 +30,27 @@ namespace DBMM_1
 
 
         private void summaryButton_Click(object sender, RoutedEventArgs e)
-
         {
 
-            const decimal GST_RATE = 0.1m;
-
-            decimal subAmount;
-
-            decimal gstAmount;
-
-            decimal finalAmount;
-
-
-
-            subAmount = decimal.Parse(vehiclePriceTextBox.Text) - decimal.Parse(tradeInTextBox.Text);
-
-            subAmountTextBox.Text = subAmount.ToString("C");
-
-
-
-            gstAmount = subAmount * GST_RATE;
-
-            gstAmountTextBox.Text = gstAmount.ToString("C");
-
-
-
-            finalAmount = subAmount + gstAmount;
-
-            finalAmountTextBox.Text = finalAmount.ToString("C");
-
-
-
-            summaryTextBlock.Text = "Summary data displayed here";
-
+           
         }
         private void saveButton_Click(object sender, RoutedEventArgs e)
-
         {
-
-            phoneTextBox.IsEnabled = false;
-
+            //check to ensure that the customer name and phone number text boxes are not empty before saving the data
+            if (customerNameTextBox.Text == "" || phoneTextBox.Text == "")
+            {
+                summaryTextBlock.Text = "Please fill in all required fields.";
+                return;
+            }
+            //disable the customer name and phone number text boxes after saving the data
             customerNameTextBox.IsEnabled = false;
 
+            phoneTextBox.IsEnabled = false;
+            //focus the vehicle price text box after saving the data
             vehiclePriceTextBox.Focus(FocusState.Programmatic);
+            //visual display to indicate that the customer name and phone number have been saved
+            summaryTextBlock.Text = "Saved name and number";
+
 
         }
 
@@ -99,6 +77,7 @@ namespace DBMM_1
             customerNameTextBox.IsEnabled = true;
 
             customerNameTextBox.Focus(FocusState.Programmatic);
+
 
         }
 
