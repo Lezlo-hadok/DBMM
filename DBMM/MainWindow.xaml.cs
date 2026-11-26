@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -16,7 +17,11 @@ using Windows.Foundation.Collections;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace DBMM_1
+//SID: 001263434
+//Code by Benjamin Semler
+//Date 30/10/2026
+
+namespace DBMM
 {
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
@@ -45,6 +50,7 @@ namespace DBMM_1
                 if (tradeIn > vehiclePrice)
                 {
                     summaryTextBlock.Text = "Please ensure that Vehicle Price is Greater than the Trade in price";
+                    Debug.WriteLine("NULL Refrence Recived for Price");
                     return;
                 }
 
@@ -62,7 +68,7 @@ namespace DBMM_1
                 double tradeIn = Convert.ToDouble(tradeInTextBox.Text);
                 //calculate the subtotal, GST, and final amount
                 double subAmount = vehiclePrice - tradeIn;
-                double gstAmount = subAmount * 0.15;
+                double gstAmount = subAmount * 0.10;
                 double finalAmount = subAmount + gstAmount;
                 //display the calculated values in the respective text boxes
                 subAmountTextBox.Text = subAmount.ToString("C");
@@ -75,6 +81,7 @@ namespace DBMM_1
             catch (FormatException)
             {
                 summaryTextBlock.Text = "Please enter valid numbers for vehicle price and trade-in.";
+                Debug.WriteLine("Null Refrence given for Vehicle Price and/or Trade-in");
             }
         }
         private void saveButton_Click(object sender, RoutedEventArgs e)
@@ -83,6 +90,7 @@ namespace DBMM_1
             if (customerNameTextBox.Text == "" || phoneTextBox.Text == "")
             {
                 summaryTextBlock.Text = $"Please fill in all required fields. \n   Customer name: \n   Phone Number:";
+                Debug.WriteLine("NULL or INVALID Refrence Given In Customer name or Phone number");
                 return;
             }
             //disable the customer name and phone number text boxes after saving the data
@@ -118,6 +126,8 @@ namespace DBMM_1
             phoneTextBox.IsEnabled = true;
 
             customerNameTextBox.IsEnabled = true;
+
+            summaryTextBlock.Text = "";
 
             customerNameTextBox.Focus(FocusState.Programmatic);
 
